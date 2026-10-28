@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Midterm Review Game · Weeks 1–3</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F2341;--navy2:#1A3560;--gold:#C29A52;--gold-d:#A37E3B;--green:#2E7D32;--red:#B23A3A;--lg:#E8F3E9;--gray:#F3F5F9;--ink:#13203A;--mute:#5B6475;--bg:#0F2341;
+--display:'Bricolage Grotesque','Arial Black',Arial,sans-serif;--body:'Figtree',Arial,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A1830}}
+:root[data-theme="dark"]{--bg:#0A1830}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);min-height:100%}
+body{margin:0;min-height:100%;background:var(--bg);color:#fff;font-family:var(--body)}
+.wrap{max-width:1100px;margin:0 auto;padding:18px 18px 30px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,4.5vw,48px);margin:0}
+h1 span{color:var(--gold)}
+.sub{color:#B9C4D8;margin:4px 0 16px}
+button,input,select{font-family:var(--body);font-weight:700;font-size:17px}
+button{cursor:pointer;border:0;border-radius:12px;padding:12px 18px}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.card{background:#fff;color:var(--ink);border-radius:20px;padding:22px 24px}
+.gold{background:var(--gold);color:var(--navy)}.green{background:var(--green);color:#fff}.navy{background:var(--navy);color:#fff}.ghost{background:transparent;color:#D5DDEB;border:1.5px solid #3A5482}
+.setup label{font-weight:700;color:var(--mute);font-size:14px;display:block;margin:10px 0 4px}
+.setup input,.setup select{width:100%;padding:10px;border:1.5px solid #CBD2DF;border-radius:10px}
+.teamnames{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.rounds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0}
+.rtile{border-radius:14px;padding:14px;text-align:center;font-weight:800;font-family:var(--display);font-size:18px;color:#fff}
+.scores{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.sc{background:#fff;color:var(--ink);border-radius:14px;padding:8px 14px;display:flex;align-items:center;gap:10px;font-weight:800;border:3px solid transparent}
+.sc.turn{border-color:var(--gold);box-shadow:0 0 0 3px rgba(194,154,82,.35)}
+.sc .p{font-family:var(--display);font-size:28px;color:var(--green)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.rname{font-family:var(--display);font-size:22px;font-weight:800;color:var(--gold)}
+.prog{color:#B9C4D8;font-weight:700}
+.q .who{font-weight:800;color:var(--green);margin-bottom:6px}
+.q .prompt{font-family:var(--display);font-size:clamp(24px,3.4vw,38px);font-weight:700;line-height:1.25;margin:4px 0 16px;color:var(--navy)}
+.q .prompt b{color:var(--green)}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;background:var(--gray);color:var(--ink);font-size:clamp(18px,2.3vw,24px);font-weight:600;border:2.5px solid transparent;padding:14px 16px}
+.opt .l{font-family:var(--display);font-weight:800;background:var(--navy);color:#fff;border-radius:8px;min-width:40px;height:40px;display:flex;align-items:center;justify-content:center}
+.opt:hover:not(:disabled){border-color:var(--gold)}
+.opt.right{background:var(--green);color:#fff}.opt.right .l{background:#fff;color:var(--green)}
+.opt.wrong{background:#F5D6D6;color:#7A1F1F;border-color:var(--red)}
+.opt:disabled{cursor:default}
+.ex{display:none;margin-top:14px;background:var(--lg);color:var(--ink);border-radius:12px;padding:12px 16px;font-size:19px}
+.ex.show{display:block}
+.say{display:none;margin-top:12px;background:#F7F0E3;color:var(--navy);border:1.5px solid var(--gold);border-radius:12px;padding:12px 16px;font-size:20px}
+.say.show{display:block}
+.say b{color:var(--green)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.timer{font-family:var(--display);font-weight:800;font-size:30px;color:var(--navy);min-width:60px;text-align:right}
+.timer.low{color:var(--red)}
+.end{text-align:center}
+.end .win{font-family:var(--display);font-size:clamp(30px,5vw,54px);font-weight:800;color:var(--gold);margin:10px 0}
+.hidden{display:none}
+@media (max-width:700px){.rounds{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🏆 Midterm Review <span>Game</span></h1>
+  <div class="sub">Weeks 1–3 · Stress for meaning · Noun or verb · Falling ↘︎ or rising ↗︎ · Polite questions</div>
+
+  <div id="setup" class="card setup">
+    <div style="font-family:var(--display);font-size:26px;font-weight:800;color:var(--navy)">Ready to practise? 💪</div>
+    <label for="t0">Your name</label><input id="t0" placeholder="Type your name">
+    <label for="tsec">Timer per question</label>
+    <select id="tsec"><option value="0">No timer</option><option value="20">20 seconds</option><option value="30" selected>30 seconds</option><option value="45">45 seconds</option></select>
+    <div class="rounds">
+      <div class="rtile" style="background:#0F2341">1 · Stress for meaning<br><small style="font-weight:600">Week 1</small></div>
+      <div class="rtile" style="background:#2E7D32">2 · Noun or verb?<br><small style="font-weight:600">Week 2</small></div>
+      <div class="rtile" style="background:#A37E3B">3 · Falling ↘︎ or rising ↗︎<br><small style="font-weight:600">Week 3</small></div>
+      <div class="rtile" style="background:#B23A3A">4 · Polite questions<br><small style="font-weight:600">Week 3</small></div>
+    </div>
+    <div style="color:var(--mute);font-size:15px;margin-bottom:12px">20 questions. Correct answer = <b>2 points</b>. After each question, read the sentence <b>out loud</b> — then press “I said it out loud” for <b>+1 bonus</b>. Maximum: 60 points.</div>
+    <button class="green" id="start" style="font-size:20px">▶ Start the game</button>
+  </div>
+
+  <div id="game" class="hidden">
+    <div class="scores" id="scores"></div>
+    <div class="top"><div><span class="rname" id="rname"></span> <span class="prog" id="prog"></span></div><div class="timer" id="timer"></div></div>
+    <div class="card q">
+      <div class="who" id="who"></div>
+      <div class="prompt" id="prompt"></div>
+      <div class="opts" id="opts"></div>
+      <div class="ex" id="ex"></div>
+      <div class="say" id="say"></div>
+      <div class="row">
+        <button class="gold hidden" id="bonus">🗣️ I said it out loud · +1</button>
+        <button class="navy hidden" id="next">Next ▶</button>
+        <span style="flex:1"></span>
+        <button class="ghost" id="quit" style="color:var(--mute);border-color:#CBD2DF">⟲ Restart</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="end" class="card end hidden"></div>
+</div>
+<script>
+const ROUNDS=[
+ {name:'Round 1 · Stress for meaning',color:'#0F2341',qs:[
+  {p:'The meeting is on Friday, not Monday. Which sentence <b>corrects the day</b>?',o:['No, the MEETING is on Friday.','No, the meeting is on FRIDAY.','NO, the meeting is on Friday.'],a:1,ex:'Stress the word you are correcting: <b>FRIDAY</b>.',say:'No, the meeting is on <b>FRIDAY</b> — not Monday. ↘︎'},
+  {p:'"I <b>WAS</b> a teacher in my country." What does the stress on WAS mean?',o:['I am a teacher now.','I am not a teacher now — that was in the past.','I like teaching.'],a:1,ex:'WAS contrasts the past with the present.',say:'I <b>WAS</b> a teacher in my country.'},
+  {p:'Someone says: "You live in Boston, right?" You live in Worcester. Best answer?',o:['No, I LIVE in Worcester.','No, I live in WORCESTER.','No, I live in Worcester TOO.'],a:1,ex:'Correct the city — stress <b>WORCESTER</b>.',say:'No, I live in <b>WORCESTER</b> — not Boston.'},
+  {p:'"<b>SHE</b> has the experience." What does it mean?',o:['She has it — not someone else.','She has experience — not a degree.','She has it now.'],a:0,ex:'Stress on SHE = her, not another person.',say:'<b>SHE</b> has the experience.'},
+  {p:'Which sentence shows the team was <b>small</b> (not big)?',o:['I managed a small TEAM.','I MANAGED a small team.','I managed a SMALL team.'],a:2,ex:'Stress the important information: <b>SMALL</b>.',say:'I managed a <b>SMALL</b> team — but a productive one.'}]},
+ {name:'Round 2 · Noun or verb?',color:'#2E7D32',qs:[
+  {p:'"Please re-<b>CORD</b> the meeting."<br>re-CORD is a…',o:['NOUN (a thing)','VERB (an action)'],a:1,ex:'Stress SECOND = verb: to re-CORD.',say:'Please re-<b>CORD</b> the meeting.'},
+  {p:'"I need a work ______." Which stress is correct?',o:['per-MIT','PER-mit'],a:1,ex:'a PER-mit = a noun (an official paper) → stress FIRST.',say:'I need a work <b>PER</b>-mit.'},
+  {p:'"We want to ______ our sales." Which stress is correct?',o:['IN-crease','in-CREASE'],a:1,ex:'to in-CREASE = a verb → stress SECOND.',say:'We want to in-<b>CREASE</b> our sales.'},
+  {p:'"Thank you for the birthday <b>PRE</b>-sent."<br>PRE-sent is a…',o:['NOUN (a gift)','VERB (to show / give a talk)'],a:0,ex:'Stress FIRST = noun: a PRE-sent (a gift).',say:'Thank you for the birthday <b>PRE</b>-sent!'},
+  {p:'"This shirt is too small. Can I get a ______?"',o:['RE-fund','re-FUND'],a:0,ex:'a RE-fund = money back (noun) → stress FIRST.',say:'Can I get a <b>RE</b>-fund, please?'}]},
+ {name:'Round 3 · Falling ↘︎ or rising ↗︎?',color:'#A37E3B',qs:[
+  {p:'"Do you like your job?"',o:['↘︎ Falling','↗︎ Rising'],a:1,ex:'Yes/no question → the voice goes UP ↗︎.',say:'Do you like your <b>JOB</b>? ↗︎'},
+  {p:'"What time does the class start?"',o:['↘︎ Falling','↗︎ Rising'],a:0,ex:'Wh- question (what, where, when…) → usually DOWN ↘︎.',say:'What time does the class <b>START</b>? ↘︎'},
+  {p:'"I’m from Honduras."',o:['↘︎ Falling','↗︎ Rising'],a:0,ex:'A statement → DOWN ↘︎ (finished, sure).',say:'I’m from Hon<b>DU</b>ras. ↘︎'},
+  {p:'Your friend says she is moving. You are SURPRISED:<br>"You’re moving___"',o:['↘︎ You’re moving.','↗︎ You’re moving?'],a:1,ex:'Surprised / checking → UP ↗︎.',say:'You’re <b>MOV</b>ing? ↗︎'},
+  {p:'"Can you help me with this?"',o:['↘︎ Falling','↗︎ Rising'],a:1,ex:'A yes/no request → UP ↗︎ (polite, inviting).',say:'Can you <b>HELP</b> me with this? ↗︎'}]},
+ {name:'Round 4 · Polite questions',color:'#B23A3A',qs:[
+  {p:'🗓️ You need to change your shift. You talk to your manager.',o:['Change my shift.','I want a new shift.','I was wondering if it would be possible to change my shift?'],a:2,ex:'A hedge + a soft request = polite and professional.',say:'I was <b>WON</b>dering if it would be <b>POS</b>sible to change my shift? ↗︎'},
+  {p:'🎵 Your neighbor’s music is loud at 11 p.m.',o:['Turn it off!','I’m sorry to bother you, but would you mind turning the music down a little?','Your music is terrible.'],a:1,ex:'Soften first (I’m sorry to bother you), then ask (Would you mind…?).',say:'I’m sorry to <b>BOTH</b>er you, but would you <b>MIND</b> turning the music down a little? ↗︎'},
+  {p:'🔥 The heat in your apartment is not working. You call the landlord.',o:['Fix my heat today.','Could someone look at my heat, please? I have small children.','Why is the heat broken again?'],a:1,ex:'Polite request + a clear reason = urgent but not aggressive.',say:'<b>COULD</b> someone look at my heat, please? ↗︎ I have small children.'},
+  {p:'📅 You need Friday off. You talk to your boss.',o:['I’m not coming on Friday.','Can I have Friday off?','Would it be OK if I took Friday off? I can work Saturday if that would help.'],a:2,ex:'"Can I…?" is OK, but the best answer is polite AND offers something in return.',say:'Would it be <b>O</b>-<b>K</b> if I took Friday off? ↗︎ I can work <b>SAT</b>urday if that would help.'},
+  {p:'💵 Your paycheck is missing 5 hours. You talk to HR.',o:['You made a mistake!','I’m not sure if you’re aware, but my paycheck seems to be missing five hours.','Give me my money.'],a:1,ex:'The hedge "I’m not sure if you’re aware, but…" raises the problem politely.',say:'I’m not <b>SURE</b> if you’re a<b>WARE</b>, but my paycheck seems to be missing five hours.'}]}];
+const $=id=>document.getElementById(id);
+let missed=[],teams=[],scores=[],turn=0,ri=0,qi=0,answered=false,bonusDone=false,timer=null,left=0;
+
+function drawScores(){ $('scores').innerHTML=`<div class="sc turn">⭐ ${teams[0]}<span class="p">${scores[0]}</span><span style="color:var(--mute);font-size:14px">/ 60</span></div>`; }
+function stopT(){ clearInterval(timer); timer=null; }
+function startT(){ stopT(); const s=+$('tsec').value; if(!s){$('timer').textContent='';return;} left=s; $('timer').textContent=left; $('timer').classList.remove('low');
+  timer=setInterval(()=>{ left--; $('timer').textContent=left; $('timer').classList.toggle('low',left<=10); if(left<=0){ stopT(); if(!answered) reveal(-1); } },1000); }
+function show(){
+  const R=ROUNDS[ri], Q=R.qs[qi]; answered=false; bonusDone=false;
+  $('rname').textContent=R.name; $('rname').style.color='#C29A52'; $('prog').textContent='· Question '+(qi+1)+' / '+R.qs.length;
+  $('who').textContent='🎯 '+teams[0]+' — choose the best answer:';
+  $('prompt').innerHTML=Q.p;
+  $('opts').innerHTML=Q.o.map((o,i)=>`<button class="opt" data-i="${i}"><span class="l">${'ABC'[i]}</span><span>${o}</span></button>`).join('');
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>reveal(+b.dataset.i));
+  $('ex').classList.remove('show'); $('say').classList.remove('show'); $('bonus').classList.add('hidden'); $('next').classList.add('hidden');
+  drawScores(); startT();
+}
+function reveal(pick){
+  if(answered) return; answered=true; stopT();
+  const Q=ROUNDS[ri].qs[qi];
+  document.querySelectorAll('.opt').forEach((b,i)=>{ b.disabled=true; if(i===Q.a) b.classList.add('right'); else if(i===pick) b.classList.add('wrong'); });
+  const ok=pick===Q.a; if(ok) scores[turn]+=2; else missed.push(ROUNDS[ri].name.split('·')[1].trim()+': '+Q.say);
+  $('ex').innerHTML=(ok?'✅ <b>Correct! +2</b> — ':(pick<0?'⏰ <b>Time’s up!</b> — ':'❌ <b>Not quite.</b> — '))+Q.ex; $('ex').classList.add('show');
+  $('say').innerHTML='🗣️ <b>Read it aloud:</b> '+Q.say; $('say').classList.add('show');
+  $('bonus').classList.remove('hidden'); $('next').classList.remove('hidden'); drawScores();
+}
+$('bonus').onclick=()=>{ if(bonusDone) return; bonusDone=true; scores[turn]+=1; $('bonus').classList.add('hidden'); drawScores(); };
+$('next').onclick=()=>{ qi++; if(qi>=ROUNDS[ri].qs.length){ qi=0; ri++; } if(ri>=ROUNDS.length) return finish(); show(); };
+function finish(){ stopT(); $('game').classList.add('hidden'); const e=$('end'); e.classList.remove('hidden');
+  const sc=scores[0], pct=Math.round(sc/60*100); const msg=pct>=85?'Excellent! You are ready for the midterm! 🌟':pct>=65?'Good job! Practise the ones below once more. 💪':'Keep practising — try again! You can do it! 💛';
+  e.innerHTML=`<div style="font-size:60px">🎉</div><div class="win">${teams[0]}: ${sc} / 60</div><div style="font-size:22px;font-weight:700;margin-bottom:14px;color:var(--navy)">${msg}</div>
+   ${missed.length?`<div style="text-align:left;background:var(--gray);border-radius:12px;padding:12px 16px;margin:0 auto 16px;max-width:760px"><div style="font-weight:800;margin-bottom:6px">🔁 Practise these again (read them out loud):</div>${missed.map(m=>`<div style="margin:6px 0;font-size:18px">• ${m}</div>`).join('')}</div>`:'<div style="margin-bottom:16px;font-size:18px">You got every answer right! 🏆</div>'}
+   <button class="green" onclick="location.reload()">⟲ Play again</button>`; }
+$('start').onclick=()=>{ teams=[($('t0').value||'Student').trim()]; missed=[]; scores=teams.map(()=>0); turn=0; ri=0; qi=0;
+  $('setup').classList.add('hidden'); $('end').classList.add('hidden'); $('game').classList.remove('hidden'); show(); };
+$('quit').onclick=()=>{ if(confirm('Restart the game?')) location.reload(); };
+</script>
+</body>
+</html>
