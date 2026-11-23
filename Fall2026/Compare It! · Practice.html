@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compare It! · Practice comparatives, superlatives, as…as</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF2F8;--card:#FFFFFF;--ink:#0E2340;--muted:#5B6B82;--line:#D5DCE6;--soft:#E3ECF7;--navy:#0E2340;--blue:#1F5FA6;--teal:#2E86AB;--ok:#2E7D32;--no:#C0392B;--okbg:#E3F2E4;--nobg:#FBE6E3;
+ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1626;--card:#14243B;--ink:#EAF0F8;--muted:#9FB0C8;--line:#24385A;--soft:#1B3050;--okbg:#173322;--nobg:#3A1C1A}}
+:root[data-theme="dark"]{--bg:#0B1626;--card:#14243B;--ink:#EAF0F8;--muted:#9FB0C8;--line:#24385A;--soft:#1B3050;--okbg:#173322;--nobg:#3A1C1A}
+*,*::before,*::after{box-sizing:inherit}html{scroll-padding-top:env(safe-area-inset-top,0px)}html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Lexend",Arial,Helvetica,sans-serif}
+button{font-family:inherit;cursor:pointer;border:0;border-radius:12px;font-weight:600}button:focus-visible,textarea:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+header{background:var(--navy);color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header b{font-size:18px}header span{font-size:13px;color:#C9D3E3;display:block}
+.score{background:#18325A;border-radius:14px;padding:8px 16px;font-weight:800;font-size:20px;color:#8EC5E0;white-space:nowrap}
+nav{display:flex;gap:6px;padding:8px 18px 0;background:var(--navy)}nav button{background:transparent;color:#C9D3E3;padding:10px 14px;border-radius:12px 12px 0 0;font-size:15px}nav button[aria-selected="true"]{background:var(--bg);color:var(--ink)}
+main{max-width:860px;margin:0 auto;padding:18px 16px 28px}section{display:none}section.on{display:block}
+.intro{color:var(--muted);margin:0 0 12px;line-height:1.5}.intro b{color:var(--ink)}
+.bar{height:10px;background:var(--soft);border-radius:99px;overflow:hidden;margin-bottom:14px}.bar i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+.stage{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center}
+.meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
+.tag{font-size:14px;font-weight:700;padding:5px 12px;border-radius:99px;background:var(--soft);color:var(--teal)}.counter{font-size:14px;color:var(--muted)}
+.emo{font-size:clamp(44px,8vw,76px);line-height:1.1;letter-spacing:.08em}
+.q{font-size:clamp(22px,3.8vw,36px);font-weight:700;line-height:1.3;max-width:26ch}.q .gap{display:inline-block;min-width:3em;border-bottom:5px solid var(--teal);color:var(--teal)}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}@media (max-width:640px){.opts{grid-template-columns:1fr}}
+.opt{padding:16px;font-size:20px;background:var(--soft);color:var(--ink);border:2px solid var(--line)}.opt.right{background:var(--ok);border-color:var(--ok);color:#fff}.opt.wrong{background:var(--no);border-color:var(--no);color:#fff}.opt:disabled{cursor:default}
+.fb{font-size:18px;min-height:1.5em;font-weight:600;padding:10px 16px;border-radius:12px}.fb.ok{background:var(--okbg);color:var(--ok)}.fb.no{background:var(--nobg);color:var(--no)}.fb:empty{padding:0}
+.say{font-size:clamp(28px,5vw,46px);font-weight:800}.say small{display:block;font-size:16px;color:var(--muted);font-weight:600;margin-top:6px}
+textarea{width:100%;max-width:600px;min-height:80px;font:inherit;font-size:19px;padding:12px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);resize:vertical}
+.model{font-size:clamp(19px,3vw,26px);font-weight:700;color:var(--ok)}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.btn{padding:12px 22px;font-size:16px;background:var(--navy);color:#fff}.btn.ghost{background:var(--soft);color:var(--ink)}.btn.ok{background:var(--ok)}.btn.teal{background:var(--teal)}.btn[hidden]{display:none}
+.big{font-size:clamp(48px,10vw,90px);font-weight:800;color:var(--teal);line-height:1}
+.review{text-align:left;width:100%;max-width:640px;margin:0;padding:0;list-style:none}.review li{padding:10px 14px;border-radius:12px;background:var(--soft);margin-bottom:8px;font-size:16px}.review b{color:var(--ok)}
+footer{text-align:center;font-size:12px;color:var(--muted);padding:10px}
+</style>
+</head>
+<body>
+<header><div><b>⚖️ Compare It!</b><span>Practice: comparatives · superlatives · as…as</span></div><div class="score" id="score">⭐ 0</div></header>
+<nav role="tablist"><button role="tab" aria-selected="true" data-tab="r1">1️⃣ Choose It (24)</button><button role="tab" aria-selected="false" data-tab="r2">2️⃣ Say It (12)</button></nav>
+<main>
+<section id="r1" class="on">
+  <p class="intro"><b>Choose the correct form.</b> Read the rule after each answer.</p>
+  <div class="bar"><i id="bar1"></i></div>
+  <div class="stage" id="st1"></div>
+</section>
+<section id="r2">
+  <p class="intro"><b>Look at the pictures and the word.</b> Write (or say) a full sentence. Then compare with the model.</p>
+  <div class="bar"><i id="bar2"></i></div>
+  <div class="stage" id="st2"></div>
+</section>
+</main>
+<footer>Compare It! · Basic Level · comparatives, superlatives, as…as</footer>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const esc = s => { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; };
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+let ac; function beep(f = 660, d = .14, type = "sine", w = 0) { try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.value = f; o.connect(g); g.connect(ac.destination); const t = ac.currentTime + w; g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.2, t + .02); g.gain.exponentialRampToValueAtTime(.0001, t + d); o.start(t); o.stop(t + d + .03); } catch (e) {} }
+const yes = () => { beep(660, .12); beep(880, .18, "sine", .12); }, no = () => beep(220, .25, "square");
+let stars = 0; const addStar = () => { stars++; $("score").textContent = "⭐ " + stars; };
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => { document.querySelectorAll("nav button").forEach(x => x.setAttribute("aria-selected", x === b)); document.querySelectorAll("section").forEach(s => s.classList.toggle("on", s.id === b.dataset.tab)); });
+
+const BANK1 = [
+ ["🐾 Animals", "🐘 🐎", "An elephant is ___ than a horse.", ["bigger", "more big", "the biggest"], "big → bigger (double g)"],
+ ["🐾 Animals", "🐆", "The cheetah is ___ animal in the world.", ["the fastest", "the most fast", "faster"], "short adjective → the -est"],
+ ["🐾 Animals", "🐱 🐶", "My cat is ___ my dog. (Both are 5 kg.)", ["as heavy as", "as heavy than", "heavier"], "the same → as … as"],
+ ["🐾 Animals", "🐢 🐇", "A turtle is ___ than a rabbit.", ["slower", "more slow", "the slowest"], "slow → slower"],
+ ["🐾 Animals", "🐋", "The blue whale is ___ animal on Earth.", ["the biggest", "the most big", "bigger"], "big → the biggest"],
+ ["🍔 Food", "🥗 🍕", "Salad is ___ than pizza.", ["healthier", "healthyer", "the healthiest"], "healthy → healthier (y → ier)"],
+ ["🍔 Food", "🍫 🍋", "Chocolate is ___ than lemons.", ["sweeter", "more sweet", "the sweetest"], "sweet → sweeter"],
+ ["🍔 Food", "🍲", "For me, my mom's food is ___ food in the world.", ["the best", "the goodest", "better"], "good → better → the best"],
+ ["🍔 Food", "☕ 🍵", "For me, coffee is ___ tea. (I like them the same.)", ["as good as", "as good than", "the best"], "the same → as … as"],
+ ["🍔 Food", "🌶️ 🍅", "Chili peppers are ___ than tomatoes.", ["hotter", "more hot", "hoter"], "hot → hotter (double t)"],
+ ["🏙 Cities", "🌍", "Russia is ___ country in the world.", ["the biggest", "the most big", "bigger"], "big → the biggest"],
+ ["🏙 Cities", "🗼 🏙", "Tokyo is ___ than Boston.", ["bigger", "more big", "the biggest"], "big → bigger"],
+ ["🏙 Cities", "🏰 🎡", "For me, Paris is ___ London. (Both are beautiful!)", ["as beautiful as", "as beautiful than", "the most beautiful"], "the same → as … as"],
+ ["🏙 Cities", "❄️ 🌴", "Alaska is ___ than Florida.", ["colder", "more cold", "the coldest"], "cold → colder"],
+ ["🏙 Cities", "🗽", "New York is ___ city in the U.S.", ["the biggest", "biggest", "bigger"], "superlative → THE biggest"],
+ ["⚽ Sports", "🏀 ⚽", "Basketball players are ___ than soccer players.", ["taller", "more tall", "the tallest"], "tall → taller"],
+ ["⚽ Sports", "⚽", "Soccer is ___ sport in the world.", ["the most popular", "the popularest", "more popular"], "long adjective → the most"],
+ ["🚗 Things", "🏎️ 🚲", "A sports car is ___ than a bicycle.", ["more expensive", "expensiver", "the most expensive"], "long adjective → more"],
+ ["🚗 Things", "📱 📱", "My new phone is ___ my old phone. (Both are $500.)", ["as expensive as", "as expensive than", "more expensive"], "the same → as … as"],
+ ["🌎 Nature", "🏔️", "Mount Everest is ___ mountain in the world.", ["the highest", "the most high", "higher"], "high → the highest"],
+ ["🌎 Nature", "☀️ ❄️", "In Boston, July is ___ than January.", ["hotter", "more hot", "hoter"], "hot → hotter"],
+ ["📚 Life", "🔤 🀄", "For me, English is ___ than Chinese.", ["easier", "more easy", "easyer"], "easy → easier"],
+ ["🚗 Things", "✈️ 🚆", "A plane is ___ than a train.", ["faster", "more fast", "fastest"], "fast → faster"],
+ ["📚 Life", "🎉", "Friday is ___ day of the week!", ["the best", "the goodest", "better"], "good → the best"],
+];
+const BANK2 = [
+ ["🐘  🐭", "big", "comparative", "An elephant is bigger than a mouse."],
+ ["🍫  🥦", "delicious", "comparative", "Chocolate is more delicious than broccoli."],
+ ["🐆  🐢  🐇", "fast", "superlative", "The cheetah is the fastest."],
+ ["🏙  🏡", "noisy", "comparative", "A big city is noisier than a small town."],
+ ["☕  🍵", "good", "as … as", "For me, coffee is as good as tea."],
+ ["🌵  🧊", "hot", "comparative", "The desert is hotter than ice."],
+ ["🍕  🍔  🥗", "healthy", "superlative", "Salad is the healthiest."],
+ ["📱  💻", "expensive", "comparative", "A computer is more expensive than a phone."],
+ ["🐱  🐶", "friendly", "as … as", "My cat is as friendly as my dog."],
+ ["🗽  🌴  🎓", "cold (New York · Miami · Boston)", "superlative", "Boston is the coldest city."],
+ ["✈️  🚗", "fast", "comparative", "A plane is faster than a car."],
+ ["🏀  🧒", "tall", "comparative", "A basketball player is taller than a child."],
+];
+
+/* ROUND 1 */
+let R1, i1, right1, missed;
+function start1() { R1 = shuffle(BANK1).map(([c, e, q, o, w]) => { const so = shuffle(o); return { c, e, q, o: so, a: so.indexOf(o[0]), w }; }); i1 = 0; right1 = 0; missed = []; draw1(); }
+function draw1() {
+  $("bar1").style.width = (i1 / R1.length * 100) + "%";
+  if (i1 >= R1.length) return end1();
+  const it = R1[i1];
+  $("st1").innerHTML = `<div class="meta"><span class="tag">${esc(it.c)}</span><span class="counter">Question ${i1 + 1} of ${R1.length}</span></div>
+    <div class="emo">${esc(it.e)}</div><div class="q" id="q1">${esc(it.q).replace("___", '<span class="gap">?</span>')}</div>
+    <div class="opts">${it.o.map((t, k) => `<button class="opt" data-k="${k}">${esc(t)}</button>`).join("")}</div>
+    <div class="fb" id="fb1" aria-live="polite"></div><div class="row"><button class="btn" id="nx1" hidden>Next ▸</button></div>`;
+  $("st1").querySelectorAll(".opt").forEach(b => b.onclick = () => {
+    $("st1").querySelectorAll(".opt").forEach(x => x.disabled = true);
+    const ok = +b.dataset.k === it.a; $("st1").querySelectorAll(".opt")[it.a].classList.add("right");
+    $("q1").innerHTML = esc(it.q).replace("___", `<span class="gap">${esc(it.o[it.a])}</span>`);
+    if (ok) { right1++; addStar(); yes(); $("fb1").className = "fb ok"; $("fb1").textContent = "✓ Correct! " + it.w; }
+    else { b.classList.add("wrong"); no(); missed.push(it); $("fb1").className = "fb no"; $("fb1").textContent = "✗ The answer is “" + it.o[it.a] + "” — " + it.w; }
+    $("nx1").hidden = false; $("nx1").focus();
+  });
+  $("nx1").onclick = () => { i1++; draw1(); };
+}
+function end1() {
+  const pct = Math.round(right1 / R1.length * 100);
+  const msg = pct >= 90 ? "Excellent! 🌟" : pct >= 70 ? "Very good! 👍" : "Keep practicing! 💪";
+  $("st1").innerHTML = `<div class="big">${right1} / ${R1.length}</div><div class="say">${msg}</div>
+    ${missed.length ? `<p class="counter">Review your mistakes:</p><ul class="review">${missed.map(m => `<li>${esc(m.q).replace("___", `<b>${esc(m.o[m.a])}</b>`)} <span class="counter">— ${esc(m.w)}</span></li>`).join("")}</ul>` : ""}
+    <div class="row"><button class="btn teal" id="again1">↻ Try again</button><button class="btn ghost" id="go2">Go to Round 2 ▸</button></div>`;
+  $("again1").onclick = start1;
+  $("go2").onclick = () => document.querySelector('nav button[data-tab="r2"]').click();
+}
+
+/* ROUND 2 */
+let R2, i2, right2;
+function start2() { R2 = shuffle(BANK2); i2 = 0; right2 = 0; draw2(); }
+function draw2() {
+  $("bar2").style.width = (i2 / R2.length * 100) + "%";
+  if (i2 >= R2.length) return end2();
+  const [e, adj, type, model] = R2[i2];
+  $("st2").innerHTML = `<div class="meta"><span class="tag">${esc(type)}</span><span class="counter">Prompt ${i2 + 1} of ${R2.length}</span></div>
+    <div class="emo">${esc(e)}</div><div class="say">${esc(adj)}<small>Use: ${esc(type)}</small></div>
+    <label for="ans" class="counter">Your sentence:</label><textarea id="ans" placeholder="Write your sentence here…"></textarea>
+    <div class="row"><button class="btn" id="show">👀 Show a model</button></div>
+    <div class="model" id="mdl" aria-live="polite"></div>
+    <div class="row" id="self" hidden><button class="btn ok" id="got">✓ I got it</button><button class="btn ghost" id="notyet">Not yet</button></div>`;
+  $("show").onclick = () => { $("mdl").textContent = "💬 " + model; $("self").hidden = false; $("show").hidden = true; };
+  $("got").onclick = () => { right2++; addStar(); yes(); i2++; draw2(); };
+  $("notyet").onclick = () => { i2++; draw2(); };
+}
+function end2() {
+  $("st2").innerHTML = `<div class="big">${right2} / ${R2.length}</div><div class="say">${right2 >= 10 ? "Excellent! 🌟" : right2 >= 7 ? "Very good! 👍" : "Keep practicing! 💪"}</div>
+    <p class="counter">Any correct sentence is OK — the model is only one example.</p><div class="row"><button class="btn teal" id="again2">↻ Try again</button></div>`;
+  $("again2").onclick = start2;
+}
+start1(); start2();
+})();
+</script>
+</body>
+</html>
